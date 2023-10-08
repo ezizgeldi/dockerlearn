@@ -1,8 +1,0 @@
-FROM python
-
-RUN  mkdir /opt/app
-WORKDIR /opt/app
-
-COPY long.py /opt/app
-
-CMD ["python", "long.py"]
