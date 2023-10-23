@@ -1,0 +1,48 @@
+/apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep_name
+  labels:
+    app: app_label
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: which app with label will be processed
+  template:
+    metadata:
+      labels:
+        app: label for templete 
+    spec:
+      containers:
+      - name: conteiner name
+        image: which image
+        ports:
+        - containerPort: 27017
+        env:
+        - name: any  label  which we need 
+          valueFrom:
+            secretKeyRef:
+              name: 
+              key: 
+        - name: 
+          valueFrom:
+            secretKeyRef:
+              name:
+              key: 
+
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+
