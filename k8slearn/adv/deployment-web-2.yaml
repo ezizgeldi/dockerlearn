@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment-2
+  labels:
+    app: my-k8s-deployment-2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: kgb-2
+  template:
+    metadata:
+      labels:
+        project: kgb-2
+    spec:
+      containers:
+        - name: my-web-deployment-2
+          image: adv4000/k8sphp:version2
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-web-deployment-2
+  labels:
+    env: prod
+    owner: Eziz
+spec:
+  selector:
+    project: kgb-2
+  ports:
+    - name: app-listener
+      protocol: TCP
+      port: 80
+      targetPort: 80 
+  type: LoadBalancer
